@@ -1,27 +1,63 @@
-# uaibank
-Trabalho de CodeIgniter
+# CodeIgniter 4 Application Starter
 
-Para uso de login e mensagens de erro entre telas, use sessoes e flashmessages;
+## What is CodeIgniter?
 
-Ex: https://github.com/ewbriao1978/proj-session
+CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
+More information can be found at the [official site](http://codeigniter.com).
 
-Desenvolver um sistema bancário, cadastrando usuário e gerando aleatoriamente um número de conta e um username. Neste cadastro, deve se ter um depósito inicial na conta, nome do cliente, senha. O usuário deverá entrar no sistema via login e senha. O Sistema DEVERÁ ARMAZENAR A DATA DE LOGIN E LOGOUT DE CADA USUÁRIO EM UMA TABELA para Auditoria. Seu login é seu username e a senha. Ao entrar no sistema, o usuário tem alguns menus como EXTRATO, POUPANÇA, PAGAMENTOS E TRANSFERÊNCIAS.
+This repository holds a composer-installable app starter.
+It has been built from the
+[development repository](https://github.com/codeigniter4/CodeIgniter4).
 
-No EXTRATO tem todo o detalhamento de compras via débito, transferências, boletos, e crédito (salário, ou transferência realizada). Deve ter um campo data para armazenar a data em que foram realizadas as transações. Cada transação deve ter uma descrição pequena (ex: aplicação poup; resgate poup. pag. boleto, pag pix. etc).
+More information about the plans for version 4 can be found in [the announcement](http://forum.codeigniter.com/thread-62615.html) on the forums.
 
-No menu POUPANÇA, deve ter dois submenus: Aplicação e Resgate e apresentar o Saldo. Aplicação é colocar algum valor da conta corrente para a poupança. Regate é remover o valor definido pelo usuário para a conta corrente. A cada dia, deve-se aumentar o saldo da poupança de acordo com o juro anual.Taxa anual de juro é de 6.20% :'-(
+The user guide corresponding to this version of the framework can be found
+[here](https://codeigniter4.github.io/userguide/).
 
+## Installation & updates
 
-!!!!!!Analisar toda e qualquer inconsistência (ex: comprar sem saldo, etc).!!!!!!!
+`composer create-project codeigniter4/appstarter` then `composer update` whenever
+there is a new release of the framework.
 
-No Menu de PAGAMENTOS , deve ter opções para escolher pagamento via pix, boletos, debito. (no nosso sistema não tem diferença entre eles, apenas irá aparecer no extrato se foi pago com boleto, pix, etc).
-Cada vez que ocorre pagamento, o valor do saldo é diminuído com o valor a ser pago.
+When updating, check the release notes to see if there are any changes you might need to apply
+to your `app` folder. The affected files can be copied or merged from
+`vendor/codeigniter4/framework/app`.
 
+## Setup
 
-Por último, o menu TRANSFERÊNCIA, o usuário irá transferir uma quantia para uma conta destino. ( deve-se saber o numero desta conta).
-A quanta deve ser diminuída do saldo atual e somada ao saldo da conta destino).
+Copy `env` to `.env` and tailor for your app, specifically the baseURL
+and any database settings.
 
-Cada Cliente tem login e senha.
+## Important Change with index.php
 
-TRIOS!! Era isso!! Abraço
-SUGESTÃO: 1 aluno fica responsável pela tela, 1 aluno implementa o BD/ ajustes no controller, e o outro desenvolve o controller/rotas/validação.
+`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
+for better security and separation of components.
+
+This means that you should configure your web server to "point" to your project's *public* folder, and
+not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
+framework are exposed.
+
+**Please** read the user guide for a better explanation of how CI4 works!
+
+## Repository Management
+
+We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
+We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
+FEATURE REQUESTS.
+
+This repository is a "distribution" one, built by our release preparation script.
+Problems with it can be raised on our forum, or as issues in the main repository.
+
+## Server Requirements
+
+PHP version 7.3 or higher is required, with the following extensions installed:
+
+- [intl](http://php.net/manual/en/intl.requirements.php)
+- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+
+Additionally, make sure that the following extensions are enabled in your PHP:
+
+- json (enabled by default - don't turn it off)
+- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
+- xml (enabled by default - don't turn it off)
