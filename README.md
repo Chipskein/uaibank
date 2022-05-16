@@ -1,4 +1,8 @@
-# uaibank
+## [Uaibank](https://uaibank.herokuapp.com)
+
+<img alt="logo" src="https://raw.githubusercontent.com/Chipskein/uaibank/main/public/cheese.png" style="width:120px;">
+
+### [Figma](https://www.figma.com/file/dAVkB9tYV3rEc9huMjgzyb/uaibank)
 Trabalho de CodeIgniter
 Para uso de login e mensagens de erro entre telas, use sessoes e flashmessages;
 Ex: https://github.com/ewbriao1978/proj-session
