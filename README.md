@@ -1,6 +1,6 @@
 ## [Uaibank](https://uaibank.herokuapp.com)
 
-<img alt="logo" src="https://raw.githubusercontent.com/Chipskein/uaibank/main/public/cheese.png" style="width:120px;">
+<img alt="logo" src="https://raw.githubusercontent.com/Chipskein/uaibank/main/public/imgs/icon.png" style="width:120px;">
 
 ### [Figma](https://www.figma.com/file/dAVkB9tYV3rEc9huMjgzyb/uaibank)
 Trabalho de CodeIgniter
