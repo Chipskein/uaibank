@@ -6,6 +6,7 @@
 Trabalho de CodeIgniter
 Para uso de login e mensagens de erro entre telas, use sessoes e flashmessages;
 Ex: https://github.com/ewbriao1978/proj-session
+
 Desenvolver um sistema bancário, cadastrando usuário e gerando aleatoriamente um número de conta e um username. Neste cadastro, deve se ter um depósito inicial na conta, nome do cliente, senha. O usuário deverá entrar no sistema via login e senha. O Sistema DEVERÁ ARMAZENAR A DATA DE LOGIN E LOGOUT DE CADA USUÁRIO EM UMA TABELA para Auditoria. Seu login é seu username e a senha. Ao entrar no sistema, o usuário tem alguns menus como EXTRATO, POUPANÇA, PAGAMENTOS E TRANSFERÊNCIAS.
 
 No EXTRATO tem todo o detalhamento de compras via débito, transferências, boletos, e crédito (salário, ou transferência realizada). Deve ter um campo data para armazenar a data em que foram realizadas as transações. Cada transação deve ter uma descrição pequena (ex: aplicação poup; resgate poup. pag. boleto, pag pix. etc).
