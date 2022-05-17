@@ -12,6 +12,11 @@
         <input type="password" placeholder="password" name="password">
         <input type="text" placeholder="name" name="name">
         <input type="date" placeholder="birthdate" name="birthdate">
+        <input type="number" min="0.0" step='0.1'placeholder="balance R$0,0" name="balance">
+
+        Current Account<input type="radio" name="account_type" value="current">
+        Saving Account<input type="radio" name="account_type" value="saving">
+        
         <input type="submit" value="Sign in">
     </form>
 </body>

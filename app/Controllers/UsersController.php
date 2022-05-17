@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\AccountsModel;
 use App\Models\UsersModel;
 use DateTime;
 class UsersController extends BaseController
@@ -70,19 +71,31 @@ class UsersController extends BaseController
         $userId=$usermodel->Register($data);
         if($userId){
             //create bankaccount
-
-            
-            $datetime=new DateTime();
-            $datetime=$datetime->format('Y-m-d H:i:s');
-            $user=[
-                'id'=>$userId,
-                'username'=>$data['username'],
-                'name'=>$data['name'],
-                'birthdate'=>$data['birthdate'],
-                'logged_at'=>$datetime,
+            $acc_data=[
+                'balance'=>$this->request->getVar('balance'),
+                'user'=>$userId,
+                'type'=>$this->request->getVar('account_type'),
             ];
-            $this->session->setTempdata($user,null,$this->expire);
-            return redirect()->to(base_url('/users/'));
+            $accModel=new AccountsModel();
+            $accId=$accModel->createAccount($acc_data);
+            if($accId){
+                $datetime=new DateTime();
+                $datetime=$datetime->format('Y-m-d H:i:s');
+                $user=[
+                    'id'=>$userId,
+                    'username'=>$data['username'],
+                    'name'=>$data['name'],
+                    'birthdate'=>$data['birthdate'],
+                    'logged_at'=>$datetime,
+                ];
+                $this->session->setTempdata($user,null,$this->expire);
+                return redirect()->to(base_url('/users/'));
+            }
+            else {
+                //delete user
+                $this->session->setFlashdata('error', 'Não foi possivel cadastrar Usuario :(');
+                return redirect()->to(base_url('/users/register'));
+            }
         } else {
             $this->session->setFlashdata('error', 'Não foi possivel cadastrar Usuario :(');
             return redirect()->to(base_url('/users/register'));
