@@ -17,10 +17,12 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-//$routes->setDefaultController('Home');
-//$routes->setDefaultMethod('index');
+$routes->setDefaultController('Home');
+$routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
-$routes->set404Override();
+$routes->set404Override(function(){
+    echo view('Home.php');
+});
 $routes->setAutoRoute(true);
 
 /*
