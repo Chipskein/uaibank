@@ -12,14 +12,6 @@ body{
     position: absolute;
     z-index: -1;
 }
-.uaiBank {
-    margin: 50px;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    color: white;
-    font-size: 28px;
-}
 .Screen{
     width: 100%;
     display: flex;

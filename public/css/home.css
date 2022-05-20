@@ -1,0 +1,78 @@
+.logout {
+    margin: 50px 50px 50px 50px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.grid{  
+    display: grid;
+    grid-template-areas: 
+                         "big       small       small2      "
+                         "big       main       main2      "
+                         "small3       small4       small5      "
+    ;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 12vw 32vw 15vw;
+   /* grid-column-gap: 0.5vw; */
+    margin-top:120px
+}
+.SmallContainer{
+    width: 28vw;
+    height: 15vh;
+    background-color: white;
+    border-radius: 20px;
+    grid-area: small;
+}
+.SmallContainer2{
+    width: 28vw;
+    height: 15vh;
+    background-color: white;
+    border-radius: 20px;
+    grid-area: small2;
+}
+.SmallContainer3{
+    width: 28vw;
+    height: 15vh;
+    background-color: white;
+    border-radius: 20px;
+    grid-area: small3;
+}
+.SmallContainer4{
+    width: 28vw;
+    height: 15vh;
+    background-color: white;
+    border-radius: 20px;
+    grid-area: small4;
+}
+.SmallContainer5{
+    width: 28vw;
+    height: 15vh;
+    background-color: white;
+    border-radius: 20px;
+    grid-area: small5;
+}
+.Container{
+    width: 28vw;
+    height: 42vh;
+    background-color: white;
+    border-radius: 20px;
+    grid-area: main;
+}
+.Container2{
+    width: 28vw;
+    height: 42vh;
+    background-color: white;
+    border-radius: 20px;
+    grid-area: main2;
+}
+.BigContainer{
+    width: 28vw;
+    height: 60vh;
+    background-color: white;
+    border-radius: 20px;
+    grid-area: big;
+}
