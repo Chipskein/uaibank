@@ -70,15 +70,20 @@ class UsersController extends BaseController
         $usermodel=new UsersModel();
         $userId=$usermodel->Register($data);
         if($userId){
-            //create bankaccount
-            $acc_data=[
-                'balance'=>$this->request->getVar('balance'),
+            $acc_current_data=[
+                'balance'=>$this->request->getVar('balance_current'),
                 'user'=>$userId,
-                'type'=>$this->request->getVar('account_type'),
+                'type'=>'current',
+            ];
+            $acc_saving_data=[
+                'balance'=>$this->request->getVar('balance_saving'),
+                'user'=>$userId,
+                'type'=>'saving',
             ];
             $accModel=new AccountsModel();
-            $accId=$accModel->createAccount($acc_data);
-            if($accId){
+            $acc_currentId=$accModel->createAccount($acc_current_data);
+            $acc_savingId=$accModel->createAccount($acc_saving_data);
+            if($acc_currentId&&$acc_savingId){
                 $datetime=new DateTime();
                 $datetime=$datetime->format('Y-m-d H:i:s');
                 $user=[
