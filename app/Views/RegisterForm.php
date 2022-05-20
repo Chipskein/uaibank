@@ -5,16 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UaiBank</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/global.css">
 </head>
 <body>
-    <form action="/users/register" method="post">
-        <input type="text" placeholder="username" name="username">
-        <input type="password" placeholder="password" name="password">
-        <input type="text" placeholder="name" name="name">
-        <input type="date" placeholder="birthdate" name="birthdate">
-        <input type="number" min="0.0" step='0.1'placeholder="balance current R$0,0" name="balance_current">        
-        <input type="number" min="0.0" step='0.1'placeholder="balance saving R$0,0" name="balance_saving">        
-        <input type="submit" value="Sign in">
+    <div class='image'></div>
+    <div class='Screen'>
+    <p class='uaiBank'>UaiBank</p>
+    <form class='form' action="/users/register" method="post">
+        <h1 class='logar'>Criar Conta<h1>
+            <p class='inputTitle'>Nome completo</p>
+            <input class='input' type="text" placeholder="Digite seu nome" name="name">
+            <p class='inputTitle'>Username</p>
+            <input class='input' type="text" placeholder="Digite seu username" name="username">
+            <p class='inputTitle'>Senha</p>
+            <input class='input' type="password" placeholder="Digite sua senha" name="password">
+            <input class='input' type="date" placeholder="Sua data de nascimento" name="birthdate">
+            <input class='input' type="number" min="0.0" step='0.1'placeholder="Saldo inicial" name="balance_current"> 
+            <div class='submitSpace'>
+            <input class='submit' type="submit" value="Criar conta">
+            </div>
     </form>
+    </div>
 </body>
 </html>
