@@ -92,14 +92,13 @@ class UsersController extends BaseController
                     'id'=>$userId,
                     'username'=>$data['username'],
                     'name'=>$data['name'],
-                    'birthdate'=>$data['birthdate'],
+                    'birthdate'=>$birthdate,
                     'logged_at'=>$datetime,
                 ];
                 $this->session->setTempdata($user,null,$this->expire);
                 return redirect()->to(base_url('/users/'));
             }
             else {
-                //delete user
                 $this->session->setFlashdata('error', 'Não foi possivel cadastrar Usuario :(');
                 return redirect()->to(base_url('/users/register'));
             }
