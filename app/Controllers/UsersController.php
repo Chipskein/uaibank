@@ -60,11 +60,13 @@ class UsersController extends BaseController
         return view('RegisterForm');
     }
     public function Register()
-    {
+    {        
+        $birthdate=strtotime($this->request->getVar('birthdate'));
+        $birthdate=date('Y-m-d',$birthdate);
         $data=[
             'username'=>$this->request->getVar('username'),
             'name'=>$this->request->getVar('name'),
-            'birthdate'=>$this->request->getVar('birthdate'),
+            'birthdate'=>$birthdate,
             'password'=>$this->request->getVar('password'),
         ];
         $usermodel=new UsersModel();
@@ -105,5 +107,6 @@ class UsersController extends BaseController
             $this->session->setFlashdata('error', 'Não foi possivel cadastrar Usuario :(');
             return redirect()->to(base_url('/users/register'));
         }
+        
     }
 }

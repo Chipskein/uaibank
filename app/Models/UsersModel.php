@@ -11,7 +11,7 @@ class UsersModel extends Model
     protected $table            = 'Users';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $allowedFields    = ['name','username','password'];
+    protected $allowedFields    = ['name','username','password','birthdate'];
 
     public function Register($data){
         $salt="Cf1f11ePArKlBJomM0F6aJ";
