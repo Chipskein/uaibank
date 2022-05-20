@@ -1,0 +1,42 @@
+body{
+    margin:0px;
+    padding: 0px;
+}
+.image {
+    background-image: url("/imgs/creditcard.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: -1;
+}
+.uaiBank {
+    margin: 50px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    color: white;
+    font-size: 28px;
+}
+.Screen{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: flex-end;
+    justify-content:center;
+}
+.logar{
+    text-align: center;
+    font-size: 24px;
+    color: #6360FF;
+}
+.inputTitle{
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0px;
+    padding: 0px;
+    margin-top: 10px;
+}
