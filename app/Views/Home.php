@@ -8,9 +8,17 @@
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/home.css">
 </head>
+<?php
+    $session=session();
+    $id=$session->id;
+    $username=$session->username;
+    $name=$session->name;
+    $birthdate=$session->birthdate;
+    $password=$session->password;
+?>
 <body style='background-color:#A060DE; margin:50px'>
     <p class='uaiBank'>UaiBank</p>
-    <a class='logout'>Logout</a>
+    <a class='logout' href="/users/logoff">Logout</a>
     <div class='grid'>
     <div class='BigContainer'>
     <p>Perfil</p>

@@ -5,18 +5,34 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\AccountsModel;
 use App\Models\UsersModel;
+use App\Models\UsersSessionsModel;
 use DateTime;
 class UsersController extends BaseController
 {
     private $expire=3600;//seconds(1hour);
-
     public function showLoginForm()
     {
-        return view('LoginForm');
+        $session=session();
+        if($session->has('id')&&$session->has('username')&&$session->has('name')&&$session->has('birthdate')){
+            return redirect()->to(base_url('/users/'));
+        }
+        else return view('LoginForm');
     }
     public function showHome()
     {
-        return view('Home');
+        $session=session();
+        if($session->has('id')&&$session->has('username')&&$session->has('name')&&$session->has('birthdate')){
+            return view('Home');
+        }
+        else return redirect()->to(base_url('/users/login'));
+    }
+    public function ShowRegisterForm()
+    {
+        $session=session();
+        if($session->has('username')&&$session->has('name')&&$session->has('birthdate')){
+            return redirect()->to(base_url('/users/'));
+        }
+        else return view('RegisterForm');
     }
     public function Login()
     {
@@ -39,25 +55,25 @@ class UsersController extends BaseController
     }
     public function Logoff()
     {
-        $logoff_date=new DateTime();
-        $logoff_date=$logoff_date->format('Y-m-d H:i:s');
-        
-        $data=[
-            'logoff_at'=>$logoff_date,
-            'logged_at'=>$this->session->get('logged_at'),
-            'username'=>$this->session->get('username'),
-            'password'=>$this->session->get('password'),
-        ];
-        
-        //add to auditoria
-        $this->session->destroy();
-        //to login after
-        return redirect()->to(base_url('/users/'));
-    }
-
-    public function ShowRegisterForm()
-    {
-        return view('RegisterForm');
+        $session=session();
+        if($session->has('id')&&$session->has('username')&&$session->has('name')&&$session->has('birthdate')){
+            $logoff_date=new DateTime();
+            $logoff_date=$logoff_date->format('Y-m-d H:i:s');
+            $data=[
+                'logoff_at'=>$logoff_date,
+                'logged_at'=>$this->session->get('logged_at'),
+                'user'=>$this->session->get('id'),
+            ];
+            //add to auditoria
+            $usmodel=new UsersSessionsModel();
+            $usmodel->insertSession($data);
+            
+            $this->session->destroy();            
+            return redirect()->to(base_url('/users/login'));
+        } else{
+            $this->session->setFlashdata('error', 'Error Not logged');
+            return redirect()->to(base_url('/users/login'));
+        }
     }
     public function Register()
     {        
@@ -78,7 +94,7 @@ class UsersController extends BaseController
                 'type'=>'current',
             ];
             $acc_saving_data=[
-                'balance'=>$this->request->getVar('balance_saving'),
+                'balance'=>0,
                 'user'=>$userId,
                 'type'=>'saving',
             ];

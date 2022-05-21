@@ -34,6 +34,7 @@ class UsersModel extends Model
             $hashpassword=$userData[0]["password"];
             $verify_hash=crypt($password,$hashpassword);
             if($verify_hash===$hashpassword){
+                unset($userData[0]['password']);
                 return $userData[0];
             } else{
                 return false;

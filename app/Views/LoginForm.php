@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="/css/login.css">
     <link rel="stylesheet" href="/css/global.css">
 </head>
+<?php
+    $session=session();
+    $error_msg=$session->getFlashdata('error');
+?>
 <body>
     <div class='image'></div>
     <div class='Screen'>
