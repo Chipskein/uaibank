@@ -16,63 +16,114 @@
                          "small3       small4       small5      "
     ;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 12vw 32vw 15vw;
-   /* grid-column-gap: 0.5vw; */
-    margin-top:120px
+    grid-template-rows: 10vw 15vw 10vw;
+    grid-column-gap: 2vw;
+    grid-row-gap: 2vw;
+    margin-top:110px
 }
-.SmallContainer{
-    width: 28vw;
-    height: 15vh;
-    background-color: white;
-    border-radius: 20px;
+.grid-small{
     grid-area: small;
 }
-.SmallContainer2{
-    width: 28vw;
-    height: 15vh;
-    background-color: white;
-    border-radius: 20px;
+.grid-small2{
     grid-area: small2;
 }
-.SmallContainer3{
-    width: 28vw;
-    height: 15vh;
-    background-color: white;
-    border-radius: 20px;
+.grid-small3{
     grid-area: small3;
 }
-.SmallContainer4{
-    width: 28vw;
-    height: 15vh;
-    background-color: white;
-    border-radius: 20px;
+.grid-small4{
     grid-area: small4;
 }
-.SmallContainer5{
-    width: 28vw;
-    height: 15vh;
-    background-color: white;
-    border-radius: 20px;
+.grid-small5{
     grid-area: small5;
 }
-.Container{
-    width: 28vw;
-    height: 42vh;
-    background-color: white;
-    border-radius: 20px;
+.grid-normal{
     grid-area: main;
 }
-.Container2{
-    width: 28vw;
-    height: 42vh;
-    background-color: white;
-    border-radius: 20px;
+.grid-normal2{
     grid-area: main2;
 }
-.BigContainer{
-    width: 28vw;
-    height: 60vh;
-    background-color: white;
-    border-radius: 20px;
+.grid-big{
     grid-area: big;
 }
+.Container{
+    height: 89%;
+    background-color: white;
+    border-radius: 20px;
+}
+.Container2{
+    height: 93%;
+    background-color: white;
+    border-radius: 20px;
+}
+.ContainerTitle{
+    color: white;
+    font-size: 18px;
+    margin-left: 10px;
+    padding: 0px;
+    margin: 5px 0px 10px 5px;
+}
+p{
+    margin:0px
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    padding-top: 10px;
+}
+.input {
+    background-color: #D9D9D9;
+    padding: 5px 0px 5px 5px;
+    width: 150px;
+}
+.button {
+    background-color: #6360FF;
+    padding: 7px 0px 7px 7px;
+    width: 155px;
+    color: white;
+    margin-left: 10px;
+    border: none;
+}
+.marginInput{
+    margin-right: 10px;
+}
+
+
+li a {text-decoration : none; color : white;}
+
+
+nav {
+  width : 95%; 
+  background: #2892C0;
+  border-radius: 10px; 
+}
+
+span {
+    padding: 0px 15px 0px 15px;
+  background : #2892C0; 
+  color : white;
+  font-size : 1.2em;
+  cursor : pointer;
+  display: block;
+}
+
+span::after {
+  float: right;
+  right: 10%;
+  content: "+";
+}
+
+.slide {
+  clear:both;
+  width:100%;
+  height:0px;
+  overflow: hidden;
+  text-align: center;
+  transition: height .4s ease;
+}
+
+.slide li {padding : 5px;}
+
+#touch {position: absolute; opacity: 0; height: 0px;}    
+
+#touch:checked + .slide {height: 100px;} 

@@ -28,13 +28,15 @@
     margin-top: 25px;
     margin-bottom: 10px;
 }
+a{    text-decoration: none;}
 .submitInverted{
-    margin-right: 265px;
+    width: 265px;
     padding: 10px 0px 10px 0px;
     border: 2px solid #6360FF;
     color: #6360FF;
     background-color: #fff;
-    text-decoration: none;
+    text-align: center;
+    align-self: center;
     font-size: 14px;
     font-weight: 500;
 }

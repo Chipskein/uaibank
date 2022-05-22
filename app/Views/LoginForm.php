@@ -24,7 +24,7 @@
             <input class='input' type="password" placeholder="Digite sua senha" name="password">
             <div class='submitSpace'>
             <input class='submit' type="submit" value="Logar">
-            <a href='/users/register' class='submitInverted'>Criar Conta</a>
+            <a href='/users/register'><div class='submitInverted'>Criar Conta</div></a>
             </div>
     </form>
     </div>
