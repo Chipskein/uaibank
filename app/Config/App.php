@@ -30,7 +30,8 @@ class App extends BaseConfig
         //if has https is on heroku then
         if(isset($_SERVER['HTTPS'])&&$_SERVER['HTTPS'] == 'on'){
             $this->baseURL='https://uaibank.herokuapp.com/';
-        } else{
+        } 
+        else{
             $this->baseURL='http://localhost:8080/';
         }
     }
