@@ -2,3 +2,4 @@ vendor/*
 writable/*
 Dockerfile
 docker-compose.yml
+.dockerignore

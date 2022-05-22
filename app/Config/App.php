@@ -23,7 +23,17 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'http://localhost:8080/';
+    /*Dinamic base url */
+    public $baseURL;
+    public function __construct()
+    {
+        if($_SERVER['SERVER_NAME']=='localhost'){
+            $this->baseURL='http://localhost:8080/';
+        } 
+        else{
+            $this->baseURL='https://uaibank.herokuapp.com/';
+        }
+    }
 
     /**
      * --------------------------------------------------------------------------
