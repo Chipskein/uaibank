@@ -37,7 +37,7 @@ $routes->get('/users/register','UsersController::showRegisterForm');
 $routes->post('/users/register','UsersController::Register');
 $routes->post('/users/login','UsersController::Login');
 $routes->get('/users/logoff','UsersController::Logoff');
-$routes->get('(:any)','UsersController::showHome');
+$routes->get('(:any)','HomeController::index');
 
 /*
  * --------------------------------------------------------------------
