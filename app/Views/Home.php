@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="/css/home.css">
 </head>
 <?php
+    echo "<pre>";
+        var_dump($_SERVER);
+    echo "</pre>";
     $session=session();
     $id=$session->id;
     $username=$session->username;

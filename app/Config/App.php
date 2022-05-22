@@ -23,7 +23,17 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = BASEURL;
+    /*Dinamic base url */
+    public $baseURL;
+    public function __construct()
+    {
+        //if has https is on heroku then
+        if(isset($_SERVER['HTTPS'])&&$_SERVER['HTTPS'] == 'on'){
+            $this->baseURL='https://uaibank.herokuapp.com/';
+        } else{
+            $this->baseURL='http://localhost:8080/';
+        }
+    }
 
     /**
      * --------------------------------------------------------------------------

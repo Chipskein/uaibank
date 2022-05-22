@@ -25,14 +25,6 @@ defined('APP_NAMESPACE') || define('APP_NAMESPACE', 'App');
  */
 defined('COMPOSER_PATH') || define('COMPOSER_PATH', ROOTPATH . 'vendor/autoload.php');
 
-/*DINAMIC BASE URL */
-$protocol= 'http://localhost:8080';
-if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off'){
-    $protocol='https://'.$_SERVER['HTTP_HOST'];
-}
- 
-
-defined('BASEURL') || define('BASEURL',$protocol);
 
 /*
  |--------------------------------------------------------------------------
