@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\AccountsModel;
+use App\Models\TransfersModel;
 use App\Models\UsersModel;
 use App\Models\UsersSessionsModel;
 use DateTime;
@@ -22,7 +23,19 @@ class UsersController extends BaseController
     {
         $session=session();
         if($session->has('id')&&$session->has('username')&&$session->has('name')&&$session->has('birthdate')){
-            return view('Home');
+            $userId=$session->get('id');
+            $accsmodel=new AccountsModel();
+            $transfmodel=new TransfersModel();
+            $sessionModel=new UsersSessionsModel();
+            $accs=$accsmodel->getAccountsByUser($userId);
+            $transfers=$transfmodel->getTransfersByUser($userId);
+            $lastlogin=$sessionModel->getLastLoginFromUser($userId);
+            $data=[
+                'accounts'=>$accs,
+                'transfers'=>$transfers,
+                'lastLogin'=>$lastlogin,
+            ];
+            return view('Home',$data);
         }
         else return redirect()->to(base_url('/users/login'));
     }
