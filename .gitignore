@@ -3,3 +3,4 @@ writable/*
 Dockerfile
 docker-compose.yml
 .dockerignore
+.env

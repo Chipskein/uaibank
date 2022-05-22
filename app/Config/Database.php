@@ -30,6 +30,7 @@ class Database extends Config
      *
      * @var array
      */
+
     public $default = [
         'DSN'      => '',
         'hostname' => 'localhost',
@@ -80,6 +81,9 @@ class Database extends Config
     {
         parent::__construct();
 
+        $DATABASE_URL=getenv('JAWSDB_MARIA_URL');
+        $DATABASE_URL=str_replace('mysql://','MySQLi://',$DATABASE_URL);
+        $this->default['DSN']=$DATABASE_URL;
         // Ensure that we always set the database group to 'tests' if
         // we are currently running an automated test suite, so that
         // we don't overwrite live data on accident.
