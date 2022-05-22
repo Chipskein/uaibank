@@ -14,7 +14,10 @@
     $username=$session->username;
     $name=$session->name;
     $birthdate=$session->birthdate;
-    $password=$session->password;
+
+    $userAccounts=$accounts;
+    $userTransfers=$transfers;
+    $userLastLogin=$lastLogin;
 ?>
 <body style='background-color:#A060DE; margin:50px'>
     <p class='uaiBank'>UaiBank</p>

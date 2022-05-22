@@ -18,4 +18,12 @@ class AccountsModel extends Model
     {
         return $this->insert($data);
     }
+    public function getAccountsByUser($userId)
+    {   
+        return $this->where(['user'=>$userId])->findAll();
+    }
+    public function getAccountsIdByUser($userId)
+    {
+        return $this->select('id')->where(['user'=>$userId])->findAll();
+    }
 }

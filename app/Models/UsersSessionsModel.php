@@ -19,4 +19,9 @@ class UsersSessionsModel extends Model
     {   
         $this->insert($data);
     }
+
+    public function getLastLoginFromUser($userId)
+    {
+        return $this->select('logged_at')->where(['user'=>$userId])->orderBy('logged_at','desc')->limit(1)->find();
+    }
 }

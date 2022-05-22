@@ -28,7 +28,9 @@ class App extends BaseConfig
     public function __construct()
     {
         if($_SERVER['SERVER_NAME']=='localhost'){
-            $this->baseURL='http://localhost:8080/';
+
+            $url=isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST']:'localhost:8080';
+            $this->baseURL='http://'.$url.'/';
         } 
         else{
             $this->baseURL='https://uaibank.herokuapp.com/';
