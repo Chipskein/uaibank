@@ -28,7 +28,14 @@ class TransfersModel extends Model
         foreach($accQuery as $row){
             array_push($accIds,$row['id']);
         }
-        return $this->whereIn('from',$accIds)->orWhereIn('to',$accIds)->findAll();
+        return $this
+                ->select("Transfers.*,u.name")
+                ->join('Accounts a','Transfers.from=a.id')
+                ->join('Users u','a.user=u.id')
+                ->whereIn('Transfers.from',$accIds)
+                ->orWhereIn('Transfers.to',$accIds)
+                ->orderBy('Transfers.transfer_date','desc')
+                ->findAll();
     }
 
     public function makePayment($accId,$type,$desc,$value)

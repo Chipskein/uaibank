@@ -14,9 +14,6 @@
     $username=$session->username;
     $name=$session->name;
     $birthdate=$session->birthdate;
-
-    $userAccounts=$accounts;
-    $userTransfers=$transfers;
     $userLastLogin=$lastLogin;
 ?>
 <body style='background-color:#A060DE; margin:50px'>
@@ -52,7 +49,7 @@
                     <p class='inputTitle'>Destino</p>
                         <?php
                             $currentAccId;
-                            foreach($userAccounts as $acc){
+                            foreach($accounts as $acc){
                                 if($acc['type']=='current') $currentAccId=$acc['id'];
                             }
                             echo "<input type=hidden placeholder=\"Número da conta\" name=from value=$currentAccId>";
@@ -67,16 +64,21 @@
     <div class='grid-normal'>
         <p class='ContainerTitle'>Histórico</p>
         <div class='Container'>
-            <div align=center style='padding-top:10px'>
-                <div class=poupancDiv>
-                    <div>
-                        <p class='title'>Transferencia enviada</p>
-                        <p class='transfersDetails'>SILVRAO DA SILVA</p>
-                        <p class='transfersDetails'>R$50,00</p>
-                        <p class='transfersDetails'>PIX</p>
-                    </div>
-                    <p>26/04/2002</p>
-                </div>
+            <div align=center style='padding-top:10px;overflow-y:scroll;height:80%;'>
+                <?php
+                    foreach($transfers as $transfer){
+                        echo "<div class=poupancDiv>";
+                            echo "<div>";
+                                echo  $transfer['from']==$currentAccId?"<p class='title'>Transferencia enviada</p>":"<p class='title'>Transferencia recebida</p>";                                
+                                echo "<p class='transfersDetails'>$transfer[name]</p>";
+                                echo "<p class='transfersDetails'>R$ $transfer[value]</p>";
+                                echo "<p class='transfersDetails'>$transfer[type]</p>";
+                            echo "</div>";
+                            echo "<p>$transfer[transfer_date]</p>";
+                        echo "</div>";
+                    }
+                ?>
+                
             </div>
         </div>
     </div>
