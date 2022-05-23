@@ -40,7 +40,7 @@ $routes->get('/users/logoff','UsersController::Logoff');
 //transfers
 $routes->post('/transfers','TransfersController::createTransfer');
 $routes->post('/transfers/payment','TransfersController::createPayment');
-
+$routes->post('/transfers/require','TransfersController::requireMoney');
 //Not Found redirect to /users
 $routes->get('(:any)','HomeController::index');
 

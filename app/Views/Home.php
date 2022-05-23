@@ -129,7 +129,13 @@
     <div class='grid-small4'>
     <p class='ContainerTitle'>Receber dinheiro</p>
         <div class='Container'>
-
+        <form action="/transfers/require" method="post">
+                <div style='padding:10px'>
+                    <?php echo "<input type=hidden placeholder=\"Número da conta\" name=from value=$currentAccId>"; ?>
+                    <input type="number" name="value" placeholder="value">               
+                    <input type="submit">               
+                </div>
+            </form>
         </div>
     </div>
     <div class='grid-small5'>

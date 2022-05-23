@@ -17,7 +17,7 @@ class TransfersModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = ['type','from','to','description','transfer_date','value'];
-    private $paymentAccountId    = 1;
+    private $paymentAccountId    = 1;//account that send payments
         
     
     public function getTransfersByUser($userId=null)
@@ -62,6 +62,21 @@ class TransfersModel extends Model
             'to'=>$toaccId,
             'type'=>$type,
             'description'=>$desc,
+            'value'=>$value,
+            'transfer_date'=>$datetime
+        ];
+        return $this->insert($data);
+    }
+
+    public function receivePaymentFromBank($accId,$type,$desc,$value)
+    {
+        $datetime=new DateTime();
+        $datetime=$datetime->format('Y-m-d H:i:s');
+        $data=[
+            'from'=>$this->paymentAccountId,
+            'to'=>$accId,
+            'type'=>$type,
+            'desc'=>$desc,
             'value'=>$value,
             'transfer_date'=>$datetime
         ];

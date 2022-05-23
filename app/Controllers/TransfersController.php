@@ -73,4 +73,32 @@ class TransfersController extends BaseController
             return redirect()->to(base_url('/users/'));
         }
     }
+
+    public function requireMoney()
+    {
+        $fromAccId=$this->request->getVar('from');
+        $transferValue=$this->request->getVar('value');
+        if(!empty($fromAccId)&&!empty($transferValue)){
+            $transferType='special payment';
+            $transferDesc='Payment';
+            $accModel=new AccountsModel();
+                $transferModel=new TransfersModel();
+                $transferId=$transferModel->receivePaymentFromBank($fromAccId,$transferType,$transferDesc,$transferValue);
+                if($transferId){
+                    //don't remove money from root bank account
+                    $accModel->addToAccount($fromAccId,$transferValue);
+                    $this->session->setFlashdata('sucess','Pagamento Recebido');
+                    return redirect()->to(base_url('/users/'));
+                } else{
+                    $this->session->setFlashdata('error','Um erro ocorreu');
+                    return redirect()->to(base_url('/users/'));
+                }
+        } else{
+            $this->session->setFlashdata('error','Valores inválidos');
+            return redirect()->to(base_url('/users/'));
+        }
+    
+        //$accModel->addToAccount($fromAccId,$transferValue);
+
+    }
 }
