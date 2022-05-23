@@ -4,6 +4,8 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 use App\Models\AccountsModel;
+use DateTime;
+
 class TransfersModel extends Model
 {
     protected $DBGroup          = 'default';
@@ -16,7 +18,8 @@ class TransfersModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = ['type','from','to','description','transfer_date','value'];
     private $paymentAccountId    = 1;
-
+        
+    
     public function getTransfersByUser($userId=null)
     {
         $accIds=[];
@@ -31,10 +34,31 @@ class TransfersModel extends Model
     public function makePayment($accId,$type,$desc,$value)
     {
         //insert into Transfers to $paymentAccount
+        $datetime=new DateTime();
+        $datetime=$datetime->format('Y-m-d H:i:s');
+        $data=[
+            'from'=>$accId,
+            'to'=>$this->paymentAccountId,
+            'type'=>$type,
+            'desc'=>$desc,
+            'value'=>$value,
+            'transfer_date'=>$datetime
+        ];
+        return $this->insert($data);
     }
     public function makeTransferTo($accId,$toaccId,$type,$desc,$value)
     {
-        //insert into Transfers to $toaccId
+        $datetime=new DateTime();
+        $datetime=$datetime->format('Y-m-d H:i:s');
+        $data=[
+            'from'=>$accId,
+            'to'=>$toaccId,
+            'type'=>$type,
+            'description'=>$desc,
+            'value'=>$value,
+            'transfer_date'=>$datetime
+        ];
+        return $this->insert($data);
     }
 }
 

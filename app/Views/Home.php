@@ -40,17 +40,26 @@
     <div class='grid-small2'>
         <p class='ContainerTitle'>Transfira agora!</p>
         <div class='Container'>
-            <div class='row'>
-                <div class='marginInput'>
-                    <p class='inputTitle'>Valor</p>
-                    <input class='input' type="number" placeholder="R$0,00" name="value">
-                </div>
-                <div>
-                <p class='inputTitle'>Destino</p>
-                    <input class='input' type="number" placeholder="Número da conta" name="destiny">
+            <form action="/transfers" method="post">
+                <div class='row'>
+                    <div class='marginInput'>
+                        <p class='inputTitle'>Valor</p>
+                        <input class='input' type="number" placeholder="R$0,00" name="value">
                     </div>
-            </div>
-            <input type='submit' value='Transferir' class='button'>
+                    <div>
+                    <p class='inputTitle'>Destino</p>
+                        <?php
+                            $currentAccId;
+                            foreach($userAccounts as $acc){
+                                if($acc['type']=='current') $currentAccId=$acc['id'];
+                            }
+                            echo "<input type=hidden placeholder=\"Número da conta\" name=from value=$currentAccId>";
+                        ?>    
+                        <input class='input' type="number" placeholder="Número da conta" name="to">
+                        </div>
+                </div>
+                <input type='submit' value='Transferir' class='button'>
+            </form>
         </div>
     </div>
     <div class='grid-normal'>

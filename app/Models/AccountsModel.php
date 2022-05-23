@@ -8,11 +8,11 @@ class AccountsModel extends Model
 {
     protected $DBGroup          = 'default';
     protected $table            = 'Accounts';
-    protected $primaryKey       = array('id','user','type');
+    protected $primaryKey       = 'id';//should be a composite key codeigniter doesn't support
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     //type => saving or current
-    protected $allowedFields    = ['user','type','balance'];
+    protected $allowedFields    = ['id','user','type','balance'];
 
     public function createAccount($data)
     {
@@ -25,5 +25,31 @@ class AccountsModel extends Model
     public function getAccountsIdByUser($userId)
     {
         return $this->select('id')->where(['user'=>$userId])->findAll();
+    }
+    public function verifyBalanceSubstractionFromAccount($accId,$substractionValue)
+    {
+        $balance=$this->where(['id'=>$accId])->findColumn('balance')[0];
+        $operation=$balance-$substractionValue;
+        if($operation>=0) return true;
+        else return false;
+    }
+
+    public function removeFromAccount($accId,$value)
+    {
+        $verifybalance=$this->verifyBalanceSubstractionFromAccount($accId,$value);
+        if($verifybalance){
+            $currentbalance=$this->where(['id'=>$accId])->findColumn('balance')[0];
+            $balance=$currentbalance-$value;
+            $data['balance']=$balance;
+            $this->update($accId,$data);
+        }
+    }
+    public function addToAccount($accId,$value)
+    {   
+        $currentbalance=$this->where(['id'=>$accId])->findColumn('balance')[0];
+        $balance=$currentbalance+$value;
+        $data['balance']=$balance;
+        $this->update($accId,$data);
+      
     }
 }
