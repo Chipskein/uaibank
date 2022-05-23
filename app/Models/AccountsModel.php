@@ -35,7 +35,8 @@ class AccountsModel extends Model
     }
     public function AccountIsCurrentType($accId)
     {
-        $type=$this->where(['id'=>$accId])->findColumn('type')[0];
+        $query=$this->where(['id'=>$accId])->findColumn('type');
+        $type= $query ? $query[0]:false;
         if($type=='current') return true;
         else return false;
     }
