@@ -17,7 +17,8 @@ class TransfersController extends BaseController
         $transferDesc='normal transfer';
         $accModel=new AccountsModel();
         $verifyBalance=$accModel->verifyBalanceSubstractionFromAccount($fromAccId,$transferValue);
-        if($verifyBalance){
+        $verifyToAccountIsCurrent=$accModel->AccountIsCurrentType($toAccId);
+        if($verifyBalance&&$verifyToAccountIsCurrent){
             $transferModel=new TransfersModel();
             $transferId=$transferModel->makeTransferTo($fromAccId,$toAccId,$transferType,$transferDesc,$transferValue);
             if($transferId){
@@ -30,7 +31,7 @@ class TransfersController extends BaseController
                 return redirect()->to(base_url('/users/'));
             }
         } else{
-            $this->session->setFlashdata('error','Saldo Insuficiente');
+            $this->session->setFlashdata('error','Saldo Insuficiente ou Conta inválidade');
             return redirect()->to(base_url('/users/'));
         }
     }

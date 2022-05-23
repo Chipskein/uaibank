@@ -33,7 +33,12 @@ class AccountsModel extends Model
         if($operation>=0) return true;
         else return false;
     }
-
+    public function AccountIsCurrentType($accId)
+    {
+        $type=$this->where(['id'=>$accId])->findColumn('type')[0];
+        if($type=='current') return true;
+        else return false;
+    }
     public function removeFromAccount($accId,$value)
     {
         $verifybalance=$this->verifyBalanceSubstractionFromAccount($accId,$value);
