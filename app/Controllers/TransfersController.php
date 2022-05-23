@@ -42,4 +42,35 @@ class TransfersController extends BaseController
             return redirect()->to(base_url('/users/'));
         }
     }
+    public function createPayment()
+    {
+        $fromAccId=$this->request->getVar('from');
+        $transferValue=$this->request->getVar('value');
+        $transferType=$this->request->getVar('type');
+        
+        if(!empty($transferType)&&!empty($fromAccId)&&!empty($transferValue)){
+            $transferDesc='Payment';
+            $accModel=new AccountsModel();
+            $verifyBalance=$accModel->verifyBalanceSubstractionFromAccount($fromAccId,$transferValue);
+            if($verifyBalance){
+                $transferModel=new TransfersModel();
+                $transferId=$transferModel->makePayment($fromAccId,$transferType,$transferDesc,$transferValue);
+                if($transferId){
+                    $accModel->removeFromAccount($fromAccId,$transferValue);
+                    $accModel->addToAccount(1,$transferValue);
+                    $this->session->setFlashdata('sucess','Pagamento realizado');
+                    return redirect()->to(base_url('/users/'));
+                } else{
+                    $this->session->setFlashdata('error','Pagamento não concluido');
+                    return redirect()->to(base_url('/users/'));
+                }
+            } else{
+                $this->session->setFlashdata('error','Saldo Insuficiente');
+                return redirect()->to(base_url('/users/'));
+            }
+        } else{
+            $this->session->setFlashdata('error','Valores inválidos');
+            return redirect()->to(base_url('/users/'));
+        }
+    }
 }

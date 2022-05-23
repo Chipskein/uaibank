@@ -15,6 +15,7 @@
     $name=$session->name;
     $birthdate=$session->birthdate;
     $userLastLogin=$lastLogin;
+
 ?>
 <body style='background-color:#A060DE; margin:50px'>
     <p class='uaiBank'>UaiBank</p>
@@ -69,7 +70,8 @@
                     foreach($transfers as $transfer){
                         echo "<div class=poupancDiv>";
                             echo "<div>";
-                                echo  $transfer['from']==$currentAccId?"<p class='title'>Transferencia enviada</p>":"<p class='title'>Transferencia recebida</p>";                                
+                                if($transfer['type']=='normal') echo  $transfer['from']==$currentAccId ? "<p class='title'>Transferencia enviada</p>":"<p class='title'>Transferencia recebida</p>";                                
+                                else echo  $transfer['from']==$currentAccId ? "<p class='title'>Pagamento enviado</p>":"<p class='title'>Pagamento recebido</p>";                              
                                 echo "<p class='transfersDetails'>$transfer[name]</p>";
                                 echo "<p class='transfersDetails'>R$ $transfer[value]</p>";
                                 echo "<p class='transfersDetails'>$transfer[type]</p>";
@@ -110,13 +112,18 @@
     <div class='grid-small3'>
     <p class='ContainerTitle'>Faça pagamentos</p>
         <div class='Container'>
-            <div style='padding:10px'>
-                <select name='Payment'>
-                    <option>Pix</option>
-                    <option>Cartão</option>
-                    <option>Boleto</option>
-                </select>               
-            </div>
+            <form action="/transfers/payment" method="post">
+                <div style='padding:10px'>
+                    <select name='type'>
+                        <option>pix</option>
+                        <option>cartão</option>
+                        <option>boleto</option>
+                    </select>
+                    <?php echo "<input type=hidden placeholder=\"Número da conta\" name=from value=$currentAccId>"; ?>
+                    <input type="number" name="value" placeholder="value">               
+                    <input type="submit">               
+                </div>
+            </form>
         </div>
     </div>
     <div class='grid-small4'>
