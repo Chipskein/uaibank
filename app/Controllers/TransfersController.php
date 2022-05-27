@@ -101,4 +101,25 @@ class TransfersController extends BaseController
         //$accModel->addToAccount($fromAccId,$transferValue);
 
     }
+    public function rescueFromSavingAcc()
+    {
+
+        $toAccId=$this->request->getVar('to');
+        $fromAccId=$this->request->getVar('from');
+        $transferValue=$this->request->getVar('value');
+        $transferType='rescue';
+        $transferDesc='rescue from saving account';
+        //remove from saving account to current_acc;
+
+    }
+    public function ApplyToSavingAcc()
+    {
+        $toAccId=$this->request->getVar('to');
+        $fromAccId=$this->request->getVar('from');
+        $transferValue=$this->request->getVar('value');
+        $transferType=$this->request->getVar('type');
+        $transferDesc='Apply to Saving Account';
+        //add to saving account from current_account
+    }
+
 }

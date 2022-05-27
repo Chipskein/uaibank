@@ -24,7 +24,7 @@ class AccountsModel extends Model
     }
     public function getAccountsIdByUser($userId)
     {
-        return $this->select('id')->where(['user'=>$userId])->findAll();
+        return $this->select('id')->where(['user'=>$userId])->orderBy('type')->findAll();
     }
     public function verifyBalanceSubstractionFromAccount($accId,$substractionValue)
     {
