@@ -17,7 +17,9 @@ class TransfersModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = ['type','from','to','description','transfer_date','value'];
-    private $paymentAccountId    = 1;//account that send payments
+    
+    
+    private $paymentAccountId    = 1;//account that send internal bank tranfers
         
     
     public function getTransfersByUser($userId=null)
@@ -82,5 +84,23 @@ class TransfersModel extends Model
         ];
         return $this->insert($data);
     }
+    public function getSavingAccLastTransaction($SaveAccId, $CrtAccId)
+    {
+        $data=[
+            'from'=>$CrtAccId,
+            'to'=>$SaveAccId,
+        ];
+        return $this->where($data)->orderBy('transfer_date','desc')->limit(1)->findAll();
+    }
+    public function getSavingAccLastYeld($CrtAccId)
+    {
+        $data=[
+            'from'=>$this->paymentAccountId,
+            'to'=>$SaveAccId,
+        ];
+        
+        return $this->where($data)->orderBy('transfer_date','desc')->limit(1)->findAll();
+    }
+
 }
 

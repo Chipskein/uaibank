@@ -41,6 +41,10 @@ $routes->get('/users/logoff','UsersController::Logoff');
 $routes->post('/transfers','TransfersController::createTransfer');
 $routes->post('/transfers/payment','TransfersController::createPayment');
 $routes->post('/transfers/require','TransfersController::requireMoney');
+//transfers/saving/
+$routes->post('/transfers/saving/rescue','TransfersController::rescueFromSavingAccount');
+$routes->post('/transfers/saving/apply','TransfersController::ApplyToSavingAccount');
+
 //Not Found redirect to /users
 $routes->get('(:any)','HomeController::index');
 

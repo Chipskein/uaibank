@@ -28,6 +28,9 @@ class UsersController extends BaseController
             $transfmodel=new TransfersModel();
             $sessionModel=new UsersSessionsModel();
             $accs=$accsmodel->getAccountsByUser($userId);
+            $current_acc=$accs[0];
+            $saving_acc=$accs[1];
+            //$teste=$transfmodel->getSavingAccLastTransaction($saving_acc["id"],$current_acc["id"]);
             $transfers=$transfmodel->getTransfersByUser($userId);
             $lastlogin=$sessionModel->getLastLoginFromUser($userId);
             $data=[
@@ -36,6 +39,7 @@ class UsersController extends BaseController
                 'lastLogin'=>$lastlogin,
             ];
             return view('Home',$data);
+            
         }
         else return redirect()->to(base_url('/users/login'));
     }
