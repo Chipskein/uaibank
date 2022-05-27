@@ -103,16 +103,18 @@ p{
 /* The container must be positioned relative: */
 .custom-select {
     position: relative;
-    font-family: Arial;
-  
+    align-items: center;
   }
   
   .custom-select select {
-    display: none; /*hide original SELECT element: */
+    display: none; 
+    border-radius: 5px;/*hide original SELECT element: */
   }
   
   .select-selected {
-    width: 25vw;
+    width: 23vw;
+    border-radius: 5px;
+    align-items: center;
     background-color: DodgerBlue;
   }
   
@@ -145,13 +147,15 @@ p{
   
   /* Style items (options): */
   .select-items {
-    width: 25vw;
+    width: 26vw;
     position: absolute;
     background-color: DodgerBlue;
     top: 100%;
     left: 0;
     right: 0;
     z-index: 99;
+    border-end-end-radius: 5px;
+    border-end-start-radius: 5px;
   }
   
   /* Hide the items when the select box is closed: */

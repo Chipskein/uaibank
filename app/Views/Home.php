@@ -16,6 +16,8 @@
     $birthdate=$session->birthdate;
     $userLastLogin=$lastLogin;
     $birthdate= date("d-m-Y",strtotime($birthdate));
+    $lastLogin= substr($lastLogin[0]['logged_at'],0,16);
+    $lastLogin= date("d-m-Y",strtotime($lastLogin));
 ?>
 <body style='background-color:#A060DE; margin:50px'>
     <p class='uaiBank'>UaiBank</p>
@@ -39,11 +41,11 @@
                     <p>Saldo da poupança</p>
                     <input disabled class='inputSaldo' value='R$ <?php echo $accounts[1]['balance']?>' >
                 </div>
+                <p>Último acesso em: <?php echo $lastLogin ?></p>
             </div>
         <?php
     $birthdate=$session->birthdate;
     $userLastLogin=$lastLogin;
-    $accounts
     ?>
         </div>
 
@@ -124,7 +126,7 @@
                 </div>
                 <div  style='padding-top:10px'>
                     <form method="post" action="/transfers/saving/rescue">
-                        <input class='input' type="number" placeholder="Digite valor do resgate" name="value">
+                        <input class='input' type="number" placeholder="Digite valor" name="value">
                         <input type='submit' value='Resgatar' class='button'>
                     </form>
                 </div>
@@ -134,16 +136,21 @@
     <div class='grid-small3'>
     <p class='ContainerTitle'>Faça pagamentos</p>
         <div class='Container'>
-            <form action="/transfers/payment" method="post">
-                <div style='padding:10px'>
+            <form align=center  action="/transfers/payment" method="post">
+                <div style='padding:10px;'>
+                <div class="custom-select" style="width:230px;margin-left:12px">
                     <select name='type'>
-                        <option>pix</option>
-                        <option>cartão</option>
-                        <option>boleto</option>
+                      <option>Selecione forma de pagamento:</option>
+                      <option>Pix</option>
+                      <option>Cartão</option>
+                      <option>Boleto</option>
                     </select>
+                </div>
                     <?php echo "<input type=hidden placeholder=\"Número da conta\" name=from value=$currentAccId>"; ?>
-                    <input type="number" name="value" placeholder="value">               
-                    <input type="submit">               
+                    <div align=center style='margin-top:20px'>
+                        <input class='input' type="number" name="value" placeholder="value">               
+                        <input type="submit" value='Pagar' class='button'> 
+                    </div>              
                 </div>
             </form>
         </div>
@@ -154,7 +161,7 @@
         <form class='alignCenter' action="/transfers/require" method="post">
                 <div style='padding:10px'>
                     <?php echo "<input type=hidden placeholder=\"Número da conta\" name=from value=$currentAccId>"; ?>
-                    <input class='input' type="number" name="value" placeholder="value">               
+                    <input class='input' type="number" name="value" placeholder="R$0,00">               
                     <input type="submit" class='button' value='receber'>               
                 </div>
             </form>
@@ -163,21 +170,15 @@
     <div class='grid-small5'>
     <p class='ContainerTitle'>Aplique na poupança</p>
         <div class='Container'>
-        <div class="custom-select" style="width:200px;">
-  <select>
-    <option value="0">Selecione forma de pagamento:</option>
-    <option value="1">Pix</option>
-    <option value="2">Cartão</option>
-    <option value="3">Boleto</option>
-  </select>
+            <form class='alignCenter' action="/transfers/" method="post">
+                            <div style='padding:10px'>
+                                <?php echo "<input type=hidden placeholder=\"Número da conta\" name=from value=$currentAccId>"; ?>
+                                <input class='input' type="number" name="value" placeholder="R$0,00">               
+                                <input type="submit" class='button' value='Aplicar'>               
+                            </div>
+                        </form>
+
 </div>
-<form class='alignCenter' action="/transfers/" method="post">
-                <div style='padding:10px'>
-                    <?php echo "<input type=hidden placeholder=\"Número da conta\" name=from value=$currentAccId>"; ?>
-                    <input class='input' type="number" name="value" placeholder="value">               
-                    <input type="submit" class='button' value='Aplicar'>               
-                </div>
-            </form>
         </div>
     </div>
     </div>
