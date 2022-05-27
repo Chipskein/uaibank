@@ -28,9 +28,34 @@ class UsersController extends BaseController
             $transfmodel=new TransfersModel();
             $sessionModel=new UsersSessionsModel();
             $accs=$accsmodel->getAccountsByUser($userId);
+            
             $current_acc=$accs[0];
             $saving_acc=$accs[1];
-            //$teste=$transfmodel->getSavingAccLastTransaction($saving_acc["id"],$current_acc["id"]);
+
+            // data da ultima vez q fez rendimento
+            $today=new Datetime();
+            $today=$today->format('Y-m-d');
+            $lastYeldTransfer = $transfmodel->getSavingAccLastYeld($saving_acc['id']);
+            
+            $value=$lastYeldTransfer[0]['transfer_date'];
+            $date=new Datetime($value);
+            $date=$date->format('Y-m-d');
+            
+            // senão calcula do q tive rna conta  6,20/365 
+            if($value && $date != $today){                               
+                $yeld = ((6.2/365)*100)/$saving_acc['balance'];
+                $transferYeld = $transfmodel->receiveYeldFromBank($saving_acc['id'], $yeld);
+                if($transferYeld){
+                    $accsmodel->addToAccount($saving_acc['id'],$yeld);
+                }
+            } else if(count($lastYeldTransfer) == 0){
+                $yeld = ((6.2/365)*100)/$saving_acc['balance'];
+                $transferYeld = $transfmodel->receiveYeldFromBank($saving_acc['id'], $yeld);
+                if($transferYeld){
+                    $accsmodel->addToAccount($saving_acc['id'],$yeld);
+                }
+            }          
+
             $transfers=$transfmodel->getTransfersByUser($userId);
             $lastlogin=$sessionModel->getLastLoginFromUser($userId);
             $data=[
@@ -39,7 +64,6 @@ class UsersController extends BaseController
                 'lastLogin'=>$lastlogin,
             ];
             return view('Home',$data);
-            
         }
         else return redirect()->to(base_url('/users/login'));
     }

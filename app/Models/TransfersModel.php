@@ -92,15 +92,29 @@ class TransfersModel extends Model
         ];
         return $this->where($data)->orderBy('transfer_date','desc')->limit(1)->findAll();
     }
-    public function getSavingAccLastYeld($CrtAccId)
+    public function getSavingAccLastYeld($SaveAccId)
     {
         $data=[
             'from'=>$this->paymentAccountId,
             'to'=>$SaveAccId,
+            'type'=>'yeld'
         ];
         
-        return $this->where($data)->orderBy('transfer_date','desc')->limit(1)->findAll();
+        return $this->where($data)->orderBy('transfer_date','desc')->limit(1)->find();
     }
-
+    public function receiveYeldFromBank($accId,$value)
+    {
+        $datetime=new DateTime();
+        $datetime=$datetime->format('Y-m-d H:i:s');
+        $data=[
+            'from'=>$this->paymentAccountId,
+            'to'=>$accId,
+            'type'=>'yeld',
+            'desc'=>'Saving account yeld',
+            'value'=>$value,
+            'transfer_date'=>$datetime
+        ];
+        return $this->insert($data);
+    }
 }
 

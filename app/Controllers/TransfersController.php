@@ -112,7 +112,7 @@ class TransfersController extends BaseController
         $transferDesc='rescue from saving account';
         $verifyBalance=$accModel->verifyBalanceSubstractionFromAccount($fromAccId,$transferValue);
         $verifyToAccountIsCurrent=$accModel->AccountIsCurrentType($toAccId);
-        
+
         if($verifyBalance&&$verifyToAccountIsCurrent){
             $transferModel=new TransfersModel();
             $transferId=$transferModel->makeTransferTo($fromAccId,$toAccId,$transferType,$transferDesc,$transferValue);
@@ -140,9 +140,8 @@ class TransfersController extends BaseController
         $transferValue=$this->request->getVar('value');
         $transferType="Apply";
         $transferDesc='Apply to Saving Account';
-        
         $verifyBalance=$accModel->verifyBalanceSubstractionFromAccount($fromAccId,$transferValue);
-        $verifyToAccountIsCurrent=$accModel->AccountIsCurrentType($toAccId);
+        $verifyToAccountIsCurrent=$accModel->AccountIsCurrentType($fromAccId);
         if($verifyBalance&&$verifyToAccountIsCurrent){
             $transferModel=new TransfersModel();
             $transferId=$transferModel->makeTransferTo($fromAccId,$toAccId,$transferType,$transferDesc,$transferValue);

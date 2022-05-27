@@ -125,6 +125,8 @@
                 <div  style='padding-top:10px'>
                     <form method="post" action="/transfers/saving/rescue">
                         <input class='input' type="number" placeholder="Digite valor do resgate" name="value">
+                        <input type="hidden" name="to" value="<?php echo $accounts[0]['id']; ?>">
+                        <input type="hidden" name="from" value="<?php echo $accounts[1]['id']; ?>">
                         <input type='submit' value='Resgatar' class='button'>
                     </form>
                 </div>
@@ -171,10 +173,12 @@
     <option value="3">Boleto</option>
   </select>
 </div>
-<form class='alignCenter' action="/transfers/" method="post">
+<form class='alignCenter' action="/transfers/saving/apply" method="post">
                 <div style='padding:10px'>
                     <?php echo "<input type=hidden placeholder=\"Número da conta\" name=from value=$currentAccId>"; ?>
-                    <input class='input' type="number" name="value" placeholder="value">               
+                    <input class='input' type="number" name="value" placeholder="value">    
+                    <input type="hidden" name="from" value="<?php echo $accounts[0]['id']; ?>">
+                    <input type="hidden" name="to" value="<?php echo $accounts[1]['id']; ?>">
                     <input type="submit" class='button' value='Aplicar'>               
                 </div>
             </form>
@@ -268,4 +272,4 @@ then close all select boxes: */
 document.addEventListener("click", closeAllSelect);
         </script>
 </body>
-</html>
+</html
