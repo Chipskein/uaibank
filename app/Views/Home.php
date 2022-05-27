@@ -151,11 +151,11 @@
     <div class='grid-small4'>
     <p class='ContainerTitle'>Receber dinheiro</p>
         <div class='Container'>
-        <form action="/transfers/require" method="post">
+        <form class='alignCenter' action="/transfers/require" method="post">
                 <div style='padding:10px'>
                     <?php echo "<input type=hidden placeholder=\"Número da conta\" name=from value=$currentAccId>"; ?>
-                    <input type="number" name="value" placeholder="value">               
-                    <input type="submit">               
+                    <input class='input' type="number" name="value" placeholder="value">               
+                    <input type="submit" class='button' value='receber'>               
                 </div>
             </form>
         </div>
@@ -171,6 +171,13 @@
     <option value="3">Boleto</option>
   </select>
 </div>
+<form class='alignCenter' action="/transfers/" method="post">
+                <div style='padding:10px'>
+                    <?php echo "<input type=hidden placeholder=\"Número da conta\" name=from value=$currentAccId>"; ?>
+                    <input class='input' type="number" name="value" placeholder="value">               
+                    <input type="submit" class='button' value='Aplicar'>               
+                </div>
+            </form>
         </div>
     </div>
     </div>
