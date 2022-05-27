@@ -73,16 +73,20 @@ p{
 }
 .input {
     background-color: #D9D9D9;
-    padding: 5px 0px 5px 5px;
+    padding: 10px 0px 10px 10px;
     width: 150px;
+    font-size: 16px;
+    border-radius: 5px;
 }
 .button {
     background-color: #6360FF;
-    padding: 7px 0px 7px 7px;
+    padding: 10px 0px 10px 10px;
     width: 155px;
     color: white;
     margin-left: 10px;
     border: none;
+    border-radius: 5px;
+    font-size: 16px;
 }
 .marginInput{
     margin-right: 10px;
@@ -192,8 +196,13 @@ p{
  .transfersData{
      font-size: 12px
  }
-
-
+.alignCenter{
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    display:flex;
+    flex: 1;
+}
  /* profile */
 
   .accountBold{
