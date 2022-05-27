@@ -123,8 +123,8 @@
                     <p>R$ 504,00</p>
                 </div>
                 <div  style='padding-top:10px'>
-                    <form method="post" action="/transfers/rescue">
-                        <input class='input' type="number" placeholder="Digite valor do resgate" name="poupancaResgate">
+                    <form method="post" action="/transfers/saving/rescue">
+                        <input class='input' type="number" placeholder="Digite valor do resgate" name="value">
                         <input type='submit' value='Resgatar' class='button'>
                     </form>
                 </div>

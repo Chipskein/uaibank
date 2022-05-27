@@ -101,25 +101,64 @@ class TransfersController extends BaseController
         //$accModel->addToAccount($fromAccId,$transferValue);
 
     }
-    public function rescueFromSavingAcc()
+    public function rescueFromSavingAccount()
     {
+        $accModel=new AccountsModel();
 
         $toAccId=$this->request->getVar('to');
         $fromAccId=$this->request->getVar('from');
         $transferValue=$this->request->getVar('value');
         $transferType='rescue';
         $transferDesc='rescue from saving account';
-        //remove from saving account to current_acc;
+        $verifyBalance=$accModel->verifyBalanceSubstractionFromAccount($fromAccId,$transferValue);
+        $verifyToAccountIsCurrent=$accModel->AccountIsCurrentType($toAccId);
+        
+        if($verifyBalance&&$verifyToAccountIsCurrent){
+            $transferModel=new TransfersModel();
+            $transferId=$transferModel->makeTransferTo($fromAccId,$toAccId,$transferType,$transferDesc,$transferValue);
+            if($transferId){
+                $accModel->removeFromAccount($fromAccId,$transferValue);
+                $accModel->addToAccount($toAccId,$transferValue);
+                $this->session->setFlashdata('sucess','Transação finalizada');
+                return redirect()->to(base_url('/users/'));
+            } else{
+                $this->session->setFlashdata('error','Transação não finalizada');
+                return redirect()->to(base_url('/users/'));
+            }
+        } else{
+            $this->session->setFlashdata('error','Saldo Insuficiente ou Conta inválidade');
+            return redirect()->to(base_url('/users/'));
+        }
 
     }
-    public function ApplyToSavingAcc()
+    public function ApplyToSavingAccount()
     {
+        $accModel=new AccountsModel();
+
         $toAccId=$this->request->getVar('to');
         $fromAccId=$this->request->getVar('from');
         $transferValue=$this->request->getVar('value');
-        $transferType=$this->request->getVar('type');
+        $transferType="Apply";
         $transferDesc='Apply to Saving Account';
-        //add to saving account from current_account
+        
+        $verifyBalance=$accModel->verifyBalanceSubstractionFromAccount($fromAccId,$transferValue);
+        $verifyToAccountIsCurrent=$accModel->AccountIsCurrentType($toAccId);
+        if($verifyBalance&&$verifyToAccountIsCurrent){
+            $transferModel=new TransfersModel();
+            $transferId=$transferModel->makeTransferTo($fromAccId,$toAccId,$transferType,$transferDesc,$transferValue);
+            if($transferId){
+                $accModel->removeFromAccount($fromAccId,$transferValue);
+                $accModel->addToAccount($toAccId,$transferValue);
+                $this->session->setFlashdata('sucess','Transação finalizada');
+                return redirect()->to(base_url('/users/'));
+            } else{
+                $this->session->setFlashdata('error','Transação não finalizada');
+                return redirect()->to(base_url('/users/'));
+            }
+        } else{
+            $this->session->setFlashdata('error','Saldo Insuficiente ou Conta inválidade');
+            return redirect()->to(base_url('/users/'));
+        }
     }
 
 }
