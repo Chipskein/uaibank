@@ -15,7 +15,7 @@
     $name=$session->name;
     $birthdate=$session->birthdate;
     $userLastLogin=$lastLogin;
-
+    $birthdate= date("d-m-Y",strtotime($birthdate));
 ?>
 <body style='background-color:#A060DE; margin:50px'>
     <p class='uaiBank'>UaiBank</p>
@@ -24,7 +24,27 @@
     <div class='grid-big'>
         <p class='ContainerTitle'>Perfil</p>
         <div class='Container2'>
-
+            <div class='Container2Inside'>
+                <div class='rowProfile'>
+                    <div class='image'></div>
+                    <div>
+                        <p class='accountBold'>Conta <?php echo $accounts[0]['id'];?></p>
+                        <p class='name'><?php echo $name;?></p>
+                        <p class='birthday'><?php echo $birthdate;?></p>
+                    </div>
+                </div>
+                <div class='contaCorrente'>
+                    <p>Saldo da conta corrente</p>
+                    <input disabled class='inputSaldo' value='R$ <?php echo $accounts[0]['balance']?>' >
+                    <p>Saldo da poupança</p>
+                    <input disabled class='inputSaldo' value='R$ <?php echo $accounts[1]['balance']?>' >
+                </div>
+            </div>
+        <?php
+    $birthdate=$session->birthdate;
+    $userLastLogin=$lastLogin;
+    $accounts
+    ?>
         </div>
 
     </div>
@@ -65,10 +85,12 @@
     <div class='grid-normal'>
         <p class='ContainerTitle'>Histórico</p>
         <div class='Container'>
-            <div align=center style='padding-top:10px;overflow-y:scroll;height:80%;'>
+            <div align=center style='padding-top:10px;overflow-y:scroll;height:90%;'>
                 <?php
                     foreach($transfers as $transfer){
-                        echo "<div class=poupancDiv>";
+                        $data= substr($transfer['transfer_date'],0,16);
+                        $data= date("d-m-Y",strtotime($data));
+                        echo "<div class=transDiv>";
                             echo "<div>";
                                 if($transfer['type']=='normal') echo  $transfer['from']==$currentAccId ? "<p class='title'>Transferencia enviada</p>":"<p class='title'>Transferencia recebida</p>";                                
                                 else echo  $transfer['from']==$currentAccId ? "<p class='title'>Pagamento enviado</p>":"<p class='title'>Pagamento recebido</p>";                              
@@ -76,7 +98,7 @@
                                 echo "<p class='transfersDetails'>R$ $transfer[value]</p>";
                                 echo "<p class='transfersDetails'>$transfer[type]</p>";
                             echo "</div>";
-                            echo "<p>$transfer[transfer_date]</p>";
+                            echo "<p class='transfersData'>$data</p>";
                         echo "</div>";
                     }
                 ?>
