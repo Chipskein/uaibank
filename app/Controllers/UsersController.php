@@ -37,7 +37,7 @@ class UsersController extends BaseController
             $today=$today->format('Y-m-d');
             $lastYeldTransfer = $transfmodel->getSavingAccLastYeld($saving_acc['id']);
             
-            $value=$lastYeldTransfer[0]['transfer_date'];
+            $value= count($lastYeldTransfer)>0 ? $lastYeldTransfer[0]['transfer_date']:false;
             $date=new Datetime($value);
             $date=$date->format('Y-m-d');
             
