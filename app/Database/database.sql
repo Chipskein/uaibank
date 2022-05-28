@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `Users`(
 CREATE TABLE IF NOT EXISTS `Accounts`(
     `id` INTEGER AUTO_INCREMENT NOT NULL,
     `user` INTEGER NOT NULL,
-    `balance` DECIMAL NOT NULL,
+    `balance` DECIMAL(15,2) NOT NULL,
     `type` VARCHAR(15) NOT NULL,
     FOREIGN KEY (user) REFERENCES Users(id),
     PRIMARY KEY(id,user,type)
@@ -30,9 +30,12 @@ CREATE TABLE IF NOT EXISTS `Transfers`(
     `to` INTEGER NOT NULL,
     `description` VARCHAR(150),
     `transfer_date` DATETIME NOT NULL, 
-    `value` DECIMAl NOT NULL,
+    `value` DECIMAL(15,2) NOT NULL,
     FOREIGN KEY (`from`) REFERENCES `Accounts`(id),
     FOREIGN KEY (`to`) REFERENCES `Accounts`(id),
     PRIMARY KEY(`id`)
 );
 
+-- CREATE INTERNAL ACCOUNT
+INSERT INTO `Users`(username, password, name, birthdate) VALUES('uaibank', '""', 'uaibank', '2002-09-05');
+INSERT INTO `Accounts`(`user`, balance, `type`) VALUES(1, 1, 9999999999.00, 'special');
