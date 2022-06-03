@@ -1,15 +1,18 @@
 .form {
-    height: 350px;
+    /* height: 350px; */
     width: 300px;
     background-color: white;
     margin-right: 100px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content:center;
     z-index: 2;
     position: relative;
     top: 10px;
     left: 0px;
-    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 20px;
     border-radius: 10px;
 }
 .uaiBank {
@@ -24,15 +27,18 @@
     width: 265px;
     padding: 10px 0px 10px 0px;
     color: #fff;
+    border: 1px #6360FF solid;
     background-color: #6360FF;
     margin-top: 25px;
     margin-bottom: 10px;
+    border-radius: 3px;
 }
 a{    text-decoration: none;}
 .submitInverted{
+    border-radius: 3px;
     width: 265px;
     padding: 10px 0px 10px 0px;
-    border: 2px solid #6360FF;
+    border: 1px solid #6360FF;
     color: #6360FF;
     background-color: #fff;
     text-align: center;

@@ -15,18 +15,24 @@
 <body>
     <div class='image'></div>
     <div class='Screen'>
-    <p class='uaiBank'>UaiBank</p>
-    <form class='form' action="/users/login" method="post">
-        <h1 class='logar'>Entrar agora<h1>
-            <p class='inputTitle'>Username</p>
-            <input class='input' type="text" placeholder="Digite seu username" name="username">
-            <p class='inputTitle'>Senha</p>
-            <input class='input' type="password" placeholder="Digite sua senha" name="password">
-            <div class='submitSpace'>
-            <input class='submit' type="submit" value="Logar">
-            <a href='/users/register'><div class='submitInverted'>Criar Conta</div></a>
+        <p class='uaiBank'>UaiBank</p>
+        <form class='form' action="/users/login" method="post">
+            <h1 class='logar'>Entrar agora</h1>
+            <div>
+                <p class='inputTitle'>Username</p>
+                <input class='input' type="text" placeholder="Digite seu username" name="username">
             </div>
-    </form>
+            <div>
+                <p class='inputTitle'>Senha</p>
+                <input class='input' type="password" placeholder="Digite sua senha" name="password">
+            </div>
+            <div class='submitSpace'>
+                <input class='submit' type="submit" value="Logar">
+                <a href='/users/register'>
+                    <div class='submitInverted'>Criar Conta</div>
+                </a>
+            </div>
+        </form>
     </div>
 </body>
 </html>
