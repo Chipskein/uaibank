@@ -11,9 +11,9 @@
 .grid{  
     display: grid;
     grid-template-areas: 
-                         "big       small       small2      "
+                         "big       main       small2     "
                          "big       main       main2      "
-                         "small3       small4       small5      "
+                         "small3    small4     small5     "
     ;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 20vh 32vh 20vh;

@@ -134,7 +134,6 @@ class TransfersController extends BaseController
     public function ApplyToSavingAccount()
     {
         $accModel=new AccountsModel();
-
         $toAccId=$this->request->getVar('to');
         $fromAccId=$this->request->getVar('from');
         $transferValue=$this->request->getVar('value');

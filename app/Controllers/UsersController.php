@@ -59,8 +59,17 @@ class UsersController extends BaseController
 
             $transfers=$transfmodel->getTransfersByUser($userId);
             $lastlogin=$sessionModel->getLastLoginFromUser($userId);
+
+            $savingAccInfo = ["monthYeld" => 0.00, "appliedValue" => 0.00];
+
+            $allApplications = $transfmodel->getAllSavingsApplications($saving_acc['id'], $current_acc['id']);
+            $allRescues = $transfmodel->getAllSavingsRescues($saving_acc['id'], $current_acc['id']);
+            $savingAccInfo['appliedValue'] = $allApplications['total']-$allRescues['total'];
+            $savingAccInfo['monthYeld'] = $transfmodel->getAllSavingsyeld($saving_acc['id'], $current_acc['id'])['total'];
+
             $data=[
                 'accounts'=>$accs,
+                'savingAccInfo'=>$savingAccInfo,
                 'transfers'=>$transfers,
                 'lastLogin'=>$lastlogin,
             ];

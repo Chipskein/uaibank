@@ -116,5 +116,53 @@ class TransfersModel extends Model
         ];
         return $this->insert($data);
     }
+    public function getAllSavingsApplications($SaveAccId, $CrtAccId)
+    {
+        $data=[
+            'from'=>$CrtAccId,
+            'to'=>$SaveAccId,
+            'type'=>'Apply'
+        ];
+        $res = $this->where($data)->findAll();
+        $total = 0.00;
+
+        foreach ($res as $value) {
+            $total += $value['value'];
+        }
+
+        return ['data'=>$this->where($data)->findAll(), 'total'=>$total];
+    }
+    public function getAllSavingsRescues($SaveAccId, $CrtAccId)
+    {
+        $data=[
+            'from'=>$SaveAccId,
+            'to'=>$CrtAccId,
+            'type'=>'rescue'
+        ];
+        $res = $this->where($data)->findAll();
+        $total = 0.00;
+
+        foreach ($res as $value) {
+            $total += $value['value'];
+        }
+
+        return ['data'=>$this->where($data)->findAll(), 'total'=>$total];
+    }
+    public function getAllSavingsyeld($SaveAccId, $CrtAccId)
+    {
+        $data=[
+            'from'=>$this->paymentAccountId,
+            'to'=>$SaveAccId,
+            'type'=>'yeld'
+        ];
+        $res = $this->where($data)->findAll();
+        $total = 0.00;
+
+        foreach ($res as $value) {
+            $total += $value['value'];
+        }
+
+        return ['data'=>$this->where($data)->findAll(), 'total'=>$total];
+    }
 }
 
