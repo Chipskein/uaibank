@@ -94,7 +94,7 @@ class UsersController extends BaseController
         $userModel=new UsersModel();
         $user=$userModel->Login($data);
         if(!$user){
-            $this->session->setFlashdata('error', 'Não foi possivel Logar Usuario :(');
+            $this->session->setFlashdata('error', 'Credenciais inválidas');
             return redirect()->to(base_url('/users/login'));
         } else{
             $datetime=new DateTime();
@@ -122,7 +122,7 @@ class UsersController extends BaseController
             $this->session->destroy();            
             return redirect()->to(base_url('/users/login'));
         } else{
-            $this->session->setFlashdata('error', 'Error Not logged');
+            $this->session->setFlashdata('error', 'Não está logado');
             return redirect()->to(base_url('/users/login'));
         }
     }
@@ -166,11 +166,11 @@ class UsersController extends BaseController
                 return redirect()->to(base_url('/users/'));
             }
             else {
-                $this->session->setFlashdata('error', 'Não foi possivel cadastrar Usuario :(');
+                $this->session->setFlashdata('error', 'Falha no cadastro do usuário');
                 return redirect()->to(base_url('/users/register'));
             }
         } else {
-            $this->session->setFlashdata('error', 'Não foi possivel cadastrar Usuario :(');
+            $this->session->setFlashdata('error', 'Falha no cadastro do usuário');
             return redirect()->to(base_url('/users/register'));
         }
         

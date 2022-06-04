@@ -18,6 +18,11 @@
         <p class='uaiBank'>UaiBank</p>
         <form class='form' action="/users/login" method="post">
             <h1 class='logar'>Entrar agora</h1>
+            <?php
+                if($error_msg){
+                    echo "<p class=error>$error_msg</p>";
+                }
+            ?>
             <div>
                 <p class='inputTitle'>Username</p>
                 <input class='input' type="text" placeholder="Digite seu username" name="username">

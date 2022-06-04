@@ -19,11 +19,19 @@
     $birthdate= date("d-m-Y",strtotime($birthdate));
     $lastLogin= substr($lastLogin[0]['logged_at'],0,16);
     $lastLogin= date("d-m-Y",strtotime($lastLogin));
+    $error_msg=$session->getFlashdata('error');
+    $success_msg=$session->getFlashdata('success');
 ?>
 
 <body style='background-color:#A060DE; margin:50px'>
     <p class='uaiBank'>UaiBank</p>
     <a class='logout' href="/users/logoff">Logout</a>
+    <div align=center>
+        <?php
+            if($error_msg) echo "<p class=error>$error_msg</p>";
+            if($success_msg) echo "<p class=success>$success_msg</p>";
+        ?>
+    </div>
     <div class='grid'>
         <div class='grid-big'>
             <p class='ContainerTitle'>Perfil</p>
@@ -52,15 +60,6 @@
             </div>
 
         </div>
-        <!-- <div class='grid-small'>
-            <p class='ContainerTitle'>Regras para transferencias</p>
-            <div class='Container'>
-                <div style='padding:15px'>
-                    <p>- Disponível em dias úteis das 10h às 17h, sem taxas.</p>
-                    <p>- Você só pode transferir dinheiro menor ou igual ao seu saldo na conta corrente.</p>
-                </div>
-            </div>
-        </div> -->
         <div class='grid-small2'>
             <p class='ContainerTitle'>Transfira agora!</p>
             <div class='Container'>
@@ -188,10 +187,6 @@
         </div>
     </div>
     </div>
-    <?php
-  //      $session = session();
- //       var_dump($_SESSION);
-    ?>
     <script>
         var x, i, j, l, ll, selElmnt, a, b, c;
         /* Look for any elements with the class "custom-select": */

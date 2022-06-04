@@ -21,7 +21,7 @@ class TransfersController extends BaseController
             $accModel=new AccountsModel();
             $verifyBalance=$accModel->verifyBalanceSubstractionFromAccount($fromAccId,$transferValue);
             $verifyToAccountIsCurrent=$accModel->AccountIsCurrentType($toAccId);
-            if($verifyBalance&&$verifyToAccountIsCurrent){
+            if($verifyBalance&&$verifyToAccountIsCurrent&&$fromAccId!=$toAccId){
                 $transferModel=new TransfersModel();
                 $transferId=$transferModel->makeTransferTo($fromAccId,$toAccId,$transferType,$transferDesc,$transferValue);
                 if($transferId){

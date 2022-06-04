@@ -20,6 +20,11 @@
         <p class='uaiBank'>UaiBank</p>
         <form class='form' action="/users/register" method="post">
             <h1 class='logar'>Criar Conta</h1>
+            <?php
+                if($error_msg){
+                    echo "<p class=error>$error_msg</p>";
+                }
+            ?>
             <div>
                 <p class='inputTitle'>Nome completo</p>
                 <input class='input' type="text" placeholder="Digite seu nome" name="name">
