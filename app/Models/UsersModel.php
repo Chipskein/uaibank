@@ -41,4 +41,8 @@ class UsersModel extends Model
             }
         }
     }
+    public function verifyIfUserExists($username){
+        $userData=$this->where(['username'=>$username])->find();
+        return (count($userData)==0) ? false:true;
+    }
 }

@@ -29,10 +29,9 @@ class UsersController extends BaseController
             $sessionModel=new UsersSessionsModel();
             $accs=$accsmodel->getAccountsByUser($userId);
             
-            $current_acc=$accs[0];
-            $saving_acc=$accs[1];
+            $current_acc=count($accs)>0 ? $accs[0]:false;
+            $saving_acc= count($accs)>0 ? $accs[1]:false;
 
-            // data da ultima vez q fez rendimento
             $today=new Datetime();
             $today=$today->format('Y-m-d');
             $lastYeldTransfer = $transfmodel->getSavingAccLastYeld($saving_acc['id']);
@@ -41,8 +40,6 @@ class UsersController extends BaseController
             $date=new Datetime($value);
             $date=$date->format('Y-m-d');
             
-            // senão calcula do q tive rna conta  6,20/365 
-
             if($value && $date != $today && $saving_acc['balance']>0){                               
                 $yeld = ((6.2/365)*100)/$saving_acc['balance'];
                 $transferYeld = $transfmodel->receiveYeldFromBank($saving_acc['id'], $yeld);
@@ -137,42 +134,46 @@ class UsersController extends BaseController
             'password'=>$this->request->getVar('password'),
         ];
         $usermodel=new UsersModel();
-        $userId=$usermodel->Register($data);
-        if($userId){
-            $acc_current_data=[
-                'balance'=>$this->request->getVar('balance_current'),
-                'user'=>$userId,
-                'type'=>'current',
-            ];
-            $acc_saving_data=[
-                'balance'=>0,
-                'user'=>$userId,
-                'type'=>'saving',
-            ];
-            $accModel=new AccountsModel();
-            $acc_currentId=$accModel->createAccount($acc_current_data);
-            $acc_savingId=$accModel->createAccount($acc_saving_data);
-            if($acc_currentId&&$acc_savingId){
-                $datetime=new DateTime();
-                $datetime=$datetime->format('Y-m-d H:i:s');
-                $user=[
-                    'id'=>$userId,
-                    'username'=>$data['username'],
-                    'name'=>$data['name'],
-                    'birthdate'=>$birthdate,
-                    'logged_at'=>$datetime,
+        if(!$usermodel->verifyIfUserExists($data['username'])){
+            $userId=$usermodel->Register($data);
+            if($userId){
+                $acc_current_data=[
+                    'balance'=>$this->request->getVar('balance_current'),
+                    'user'=>$userId,
+                    'type'=>'current',
                 ];
-                $this->session->setTempdata($user,null,$this->expire);
-                return redirect()->to(base_url('/users/'));
-            }
-            else {
+                $acc_saving_data=[
+                    'balance'=>0,
+                    'user'=>$userId,
+                    'type'=>'saving',
+                ];
+                $accModel=new AccountsModel();
+                $acc_currentId=$accModel->createAccount($acc_current_data);
+                $acc_savingId=$accModel->createAccount($acc_saving_data);
+                if($acc_currentId&&$acc_savingId){
+                    $datetime=new DateTime();
+                    $datetime=$datetime->format('Y-m-d H:i:s');
+                    $user=[
+                        'id'=>$userId,
+                        'username'=>$data['username'],
+                        'name'=>$data['name'],
+                        'birthdate'=>$birthdate,
+                        'logged_at'=>$datetime,
+                    ];
+                    $this->session->setTempdata($user,null,$this->expire);
+                    return redirect()->to(base_url('/users/'));
+                }
+                else {
+                    $this->session->setFlashdata('error', 'Falha no cadastro do usuário');
+                    return redirect()->to(base_url('/users/register'));
+                }
+            } else {
                 $this->session->setFlashdata('error', 'Falha no cadastro do usuário');
                 return redirect()->to(base_url('/users/register'));
             }
-        } else {
-            $this->session->setFlashdata('error', 'Falha no cadastro do usuário');
+        } else{
+            $this->session->setFlashdata('error', 'Usuario ja existe');
             return redirect()->to(base_url('/users/register'));
         }
-        
     }
 }

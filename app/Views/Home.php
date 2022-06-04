@@ -15,10 +15,12 @@
     $username=$session->username;
     $name=$session->name;
     $birthdate=$session->birthdate;
-    $userLastLogin=$lastLogin;
+    $userLastLogin= count($lastLogin)>0 ? $lastLogin:false;
     $birthdate= date("d-m-Y",strtotime($birthdate));
-    $lastLogin= substr($lastLogin[0]['logged_at'],0,16);
-    $lastLogin= date("d-m-Y",strtotime($lastLogin));
+    if($userLastLogin){
+        $userLastLogin= substr($userLastLogin[0]['logged_at'],0,16);
+        $userLastLogin= date("d-m-Y",strtotime($userLastLogin));
+    } 
     $error_msg=$session->getFlashdata('error');
     $success_msg=$session->getFlashdata('success');
 ?>
@@ -51,12 +53,11 @@
                         <p>Saldo da poupança</p>
                         <input disabled class='inputSaldo' value='R$ <?php echo $accounts[1]['balance']?>'>
                     </div>
-                    <p>Último acesso em: <?php echo $lastLogin ?></p>
+                    <?php
+                        if($userLastLogin) echo "<p>Último acesso em: $userLastLogin </p>";
+                    ?>
+
                 </div>
-                <?php
-                    $birthdate=$session->birthdate;
-                    $userLastLogin=$lastLogin;
-                ?>
             </div>
 
         </div>
@@ -90,18 +91,24 @@
             <div class='Container2'>
                 <div align=center style='padding-top:10px;overflow-y:scroll;height:90%;'>
                     <?php
-                    foreach($transfers as $transfer){
-                        $data= substr($transfer['transfer_date'],0,16);
-                        $data= date("d-m-Y",strtotime($data));
-                        echo "<div class=transDiv>";
-                            echo "<div>";
-                                if($transfer['type']=='normal') echo  $transfer['from']==$currentAccId ? "<p class='title'>Transferencia enviada</p>":"<p class='title'>Transferencia recebida</p>";                                
-                                else echo  $transfer['from']==$currentAccId ? "<p class='title'>Pagamento enviado</p>":"<p class='title'>Pagamento recebido</p>";                              
-                                echo "<p class='transfersDetails'>$transfer[name]</p>";
-                                echo "<p class='transfersDetails'>R$ $transfer[value]</p>";
-                                echo "<p class='transfersDetails'>$transfer[type]</p>";
+                    if(count($transfers)>0){
+                        foreach($transfers as $transfer){
+                            $data= substr($transfer['transfer_date'],0,16);
+                            $data= date("d-m-Y",strtotime($data));
+                            echo "<div class=transDiv>";
+                                echo "<div>";
+                                    if($transfer['type']=='normal') echo  $transfer['from']==$currentAccId ? "<p class='title'>Transferencia enviada</p>":"<p class='title'>Transferencia recebida</p>";                                
+                                    else echo  $transfer['from']==$currentAccId ? "<p class='title'>Pagamento enviado</p>":"<p class='title'>Pagamento recebido</p>";                              
+                                    echo "<p class='transfersDetails'>$transfer[name]</p>";
+                                    echo "<p class='transfersDetails'>R$ $transfer[value]</p>";
+                                    echo "<p class='transfersDetails'>$transfer[type]</p>";
+                                echo "</div>";
+                                echo "<p class='transfersData'>$data</p>";
                             echo "</div>";
-                            echo "<p class='transfersData'>$data</p>";
+                        }
+                    } else{
+                        echo "<div class=transDiv>";
+                            echo "<p>Sem Transações</p>";
                         echo "</div>";
                     }
                 ?>
